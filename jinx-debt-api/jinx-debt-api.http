@@ -1,0 +1,6 @@
+@jinx_debt_api_HostAddress = http://localhost:5201
+
+GET {{jinx_debt_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
