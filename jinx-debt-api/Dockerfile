@@ -8,9 +8,9 @@ RUN dotnet dev-certs https -ep /https/aspnetapp.pfx -p password
 RUN dotnet dev-certs https --trust
 
 COPY . .
-RUN dotnet restore jinx-debt-api/jinx-debt-api.csproj --disable-parallel
+RUN dotnet restore jinx-debt-api.csproj --disable-parallel
 
-RUN dotnet publish jinx-debt-api/jinx-debt-api.csproj -c release -o /app --no-restore
+RUN dotnet publish jinx-debt-api.csproj -c release -o /app --no-restore
 # serve stage
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
