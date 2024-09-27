@@ -1,23 +1,23 @@
-﻿# build stage
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER $APP_UID
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-
-RUN dotnet tool install --global dotnet-dev-certs
-RUN dotnet dev-certs https -ep /https/aspnetapp.pfx -p password
-RUN dotnet dev-certs https --trust
-
+COPY ["jinx-debt-api/jinx-debt-api.csproj", "jinx-debt-api/"]
+RUN dotnet restore "jinx-debt-api/jinx-debt-api.csproj"
 COPY . .
-RUN dotnet restore storiesbook/storiesbook.csproj --disable-parallel
+WORKDIR "/src/jinx-debt-api"
+RUN dotnet build "jinx-debt-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-RUN dotnet publish storiesbook/storiesbook.csproj -c release -o /app --no-restore
-# serve stage
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "jinx-debt-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-COPY --from=build /https/aspnetapp.pfx /https/aspnetapp.pfx
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app .
-
-EXPOSE 443 
-
-ENTRYPOINT ["dotnet", "storiesbook.dll"]
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "jinx-debt-api.dll"]
