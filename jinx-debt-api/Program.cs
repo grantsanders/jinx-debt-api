@@ -7,12 +7,13 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Host.UseSerilog(new LoggerConfiguration().WriteTo.Console().CreateLogger());
 
-builder.Services.AddDbContext<DebtContext>(options => options.UseNpgsql(builder.Configuration["ConnectionString"]));
+builder.Services.AddDbContext<DebtContext>(options => options.UseNpgsql(builder.Configuration["NEON"]));
 
 builder.Services.AddScoped<PlayerRepository>();
 builder.Services.AddScoped<DebtRepository>();
