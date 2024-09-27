@@ -36,9 +36,5 @@ public static class EndpointExtensions
             .WithName("CreateDebt")    
             .WithOpenApi();
 
-
-        
-        
-        
     }
 }

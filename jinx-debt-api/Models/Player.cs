@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace jinx_debt_api.Models;
 
 public class Player
