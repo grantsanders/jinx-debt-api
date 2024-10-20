@@ -1,7 +1,6 @@
 using jinx_debt_api.Data;
 using jinx_debt_api.Data.Contexts;
 using jinx_debt_api.Endpoints;
-using jinx_debt_api.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
