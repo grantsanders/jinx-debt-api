@@ -36,5 +36,12 @@ public static class EndpointExtensions
             .WithName("CreateDebt")    
             .WithOpenApi();
 
+        app.MapPatch("UpdateDebt",
+            async Task<Debt> ([FromBody] Debt updatedDebt, [FromServices] DebtRepository debtRepository) =>
+            {
+                return await debtRepository.UpdateDebt(updatedDebt);
+            })
+                .WithName("UpdateDebt")
+                .WithOpenApi();
     }
 }
