@@ -14,7 +14,7 @@ RUN dotnet publish jinx-debt-api.csproj -c release -o /app --no-restore
 # serve stage
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-COPY --from=build /https/aspnetapp.pfx /https/aspnetapp.pfx
+#COPY --from=build /https/aspnetapp.pfx /https/aspnetapp.pfx
 WORKDIR /app
 COPY --from=build /app .
 
