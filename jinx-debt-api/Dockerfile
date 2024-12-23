@@ -2,10 +2,10 @@
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-
-RUN dotnet tool install --global dotnet-dev-certs
-RUN dotnet dev-certs https -ep /https/aspnetapp.pfx -p password
-RUN dotnet dev-certs https --trust
+#
+#RUN dotnet tool install --global dotnet-dev-certs
+#RUN dotnet dev-certs https -ep /https/aspnetapp.pfx -p password
+#RUN dotnet dev-certs https --trust
 
 COPY . .
 RUN dotnet restore jinx-debt-api.csproj --disable-parallel
