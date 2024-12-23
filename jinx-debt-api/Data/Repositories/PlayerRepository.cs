@@ -1,13 +1,13 @@
-using jinx_debt_api.Data.Contexts;
 using jinx_debt_api.Models;
+using jinx_debt_api.Data.Contexts;
 
 namespace jinx_debt_api.Data;
 
 public class PlayerRepository
 {
-    private readonly DebtContext _context;
+    private readonly GameContext _context;
     
-    public PlayerRepository(DebtContext context)
+    public PlayerRepository(GameContext context)
     {
         _context = context;
     }
