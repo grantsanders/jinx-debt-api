@@ -17,6 +17,11 @@ public class GameRepository
         return _context.Games.First(p => p.Player1_ID == player1ID && p.Player2_ID == player2ID);
     }
     
+    public async Task<List<Game>> GetAllGames()
+    {
+        return _context.Games.ToList();
+    }
+    
     public async Task<Game> UpdateGame(Game Game)
     {
         _context.Games.Update(Game);
