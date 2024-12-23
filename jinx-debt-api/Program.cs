@@ -12,10 +12,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Host.UseSerilog(new LoggerConfiguration().WriteTo.Console().CreateLogger());
 
-builder.Services.AddDbContext<DebtContext>(options => options.UseNpgsql(builder.Configuration["NEON"]));
+builder.Services.AddDbContext<GameContext>(options => options.UseNpgsql(builder.Configuration["NEON"]));
 
 builder.Services.AddScoped<PlayerRepository>();
-builder.Services.AddScoped<DebtRepository>();
+builder.Services.AddScoped<GameRepository>();
 
 
 var app = builder.Build();

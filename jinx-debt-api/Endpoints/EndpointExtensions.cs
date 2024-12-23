@@ -22,24 +22,24 @@ public static class EndpointExtensions
             .WithName("CreatePlayer")    
             .WithOpenApi();
         
-        app.MapGet("/GetDebt/{debtId}", async Task<Debt> (int player1DebtId, int player2DebtId, [FromServices] DebtRepository debtRepository) =>
+        app.MapGet("/GetGame/{GameId}", async Task<Game> (int player1GameId, int player2GameId, [FromServices] GameRepository GameRepository) =>
             {
-                return await debtRepository.GetCurrentDebt(player1DebtId, player2DebtId);
+                return await GameRepository.GetCurrentGame(player1GameId, player2GameId);
             })
-            .WithName("GetDebtBetweenUsers")    
+            .WithName("GetGameBetweenUsers")    
             .WithOpenApi();
         
-        app.MapPost("/CreateDebt", async Task<Debt> ([FromBody] Debt newDebt, [FromServices] DebtRepository debtRepository) =>
+        app.MapPost("/CreateGame", async Task<Game> ([FromBody] Game newGame, [FromServices] GameRepository GameRepository) =>
             {
-                return await debtRepository.CreateNewDebt(newDebt);
+                return await GameRepository.CreateNewGame(newGame);
             })
-            .WithName("CreateDebt")    
+            .WithName("CreateGame")    
             .WithOpenApi();
 
-        app.MapPatch("UpdateDebt",
-            async Task<Debt> ([FromBody] Debt updatedDebt, [FromServices] DebtRepository debtRepository) =>
+        app.MapPatch("UpdateGame",
+            async Task<Game> ([FromBody] Game updatedGame, [FromServices] GameRepository GameRepository) =>
             {
-                return await debtRepository.UpdateDebt(updatedDebt);
+                return await GameRepository.UpdateGame(updatedGame);
             })
                 .WithName("UpdateDebt")
                 .WithOpenApi();
