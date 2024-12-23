@@ -33,7 +33,7 @@ public static class EndpointExtensions
             {
                 return await GameRepository.GetAllGames();
             })
-            .WithName("GetGameBetweenUsers")    
+            .WithName("GetAllGames")    
             .WithOpenApi();
         
         app.MapPost("/CreateGame", async Task<Game> ([FromBody] Game newGame, [FromServices] GameRepository GameRepository) =>
