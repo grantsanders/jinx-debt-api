@@ -22,9 +22,9 @@ public static class EndpointExtensions
             .WithName("CreatePlayer")    
             .WithOpenApi();
         
-        app.MapGet("/GetGame/{GameId}", async Task<Game> (int player1GameId, int player2GameId, [FromServices] GameRepository GameRepository) =>
+        app.MapGet("/GetGame/{player1GameId}/{player2GameId}", async (int player1GameId, int player2GameId, [FromServices] GameRepository gameRepository) => 
             {
-                return await GameRepository.GetCurrentGame(player1GameId, player2GameId);
+                return await gameRepository.GetCurrentGame(player1GameId, player2GameId);
             })
             .WithName("GetGameBetweenUsers")    
             .WithOpenApi();
