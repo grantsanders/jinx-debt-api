@@ -15,12 +15,20 @@ public static class EndpointExtensions
             .WithName("GetPlayerByID")    
             .WithOpenApi();
         
+        app.MapGet("/GetAllPlayers", async Task<List<Player>> ([FromServices] PlayerRepository playerRepository) =>
+            {
+                return await playerRepository.GetAllPlayers();
+            })
+            .WithName("GetAllPlayers")    
+            .WithOpenApi();
+        
         app.MapPost("/CreatePlayer", async Task<Player> ([FromBody] string playerName, [FromServices] PlayerRepository playerRepository) =>
             {
                 return await playerRepository.CreatePlayer(playerName);
             })
             .WithName("CreatePlayer")    
             .WithOpenApi();
+        
         
         app.MapGet("/GetGame/{player1GameId}/{player2GameId}", async (int player1GameId, int player2GameId, [FromServices] GameRepository gameRepository) => 
             {
