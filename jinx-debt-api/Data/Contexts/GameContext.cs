@@ -13,6 +13,6 @@ public class GameContext : DbContext
         modelBuilder.Entity<Game>().ToTable("Game").HasKey(d => d.ID);
     }
 
-    public DbSet<Player?> Players { get; set; }
+    public DbSet<Player> Players { get; set; }
     public DbSet<Game> Games { get; set; }
 }

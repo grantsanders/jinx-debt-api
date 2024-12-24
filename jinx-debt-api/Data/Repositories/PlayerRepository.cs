@@ -13,6 +13,7 @@ public class PlayerRepository
     }
 
     public async Task<Player?> GetPlayer(int playerID) => _context.Players.FirstOrDefault(p => p.ID == playerID);
+    public async Task<List<Player>> GetAllPlayers() => _context.Players.ToList();
     
     public async Task<Player> CreatePlayer(string playerName)
     {
